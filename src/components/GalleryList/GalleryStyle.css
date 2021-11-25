@@ -1,0 +1,8 @@
+.catImage {
+    display: inline-block;
+}
+
+img {
+    padding: 20px 15px 0px 15px;
+    max-width: 25vw;
+}

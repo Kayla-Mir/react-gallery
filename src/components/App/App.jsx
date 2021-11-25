@@ -1,14 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 
+import Axios from 'axios';
+import Header from '../Header/Header.jsx';
+import GalleryList from '../GalleryList/GalleryList.jsx'
+
+
 function App() {
+  let [galleryImages, setGalleryImages] = useState([]);
+
+  useEffect(() => {
+    getImages();
+  }, []);
+
+  const getImages = () => {
+    Axios({
+      method: 'GET',
+      url: '/gallery'
+    }).then((res) => {
+      setGalleryImages(res.data)
+    }).catch((err) => {
+      alert('Error getting images!')
+      console.error('GET /gallery error', err)
+    })
+  }
+
     return (
       <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Gallery of My Life</h1>
-        </header>
-        <p>Gallery goes here</p>
-        <img src="images/goat_small.jpg"/>
+        <Header />
+        <GalleryList galleryImages={galleryImages}/>
       </div>
     );
 }
