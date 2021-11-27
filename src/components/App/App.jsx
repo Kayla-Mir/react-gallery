@@ -8,7 +8,7 @@ import swal from 'sweetalert';
 
 
 function App() {
-  let [galleryImages, setGalleryImages] = useState([]);
+  const [galleryImages, setGalleryImages] = useState([]);
 
   useEffect(() => {
     getImages();
@@ -32,8 +32,26 @@ function App() {
     })
   }
 
-  const deleteImage = (id) => {
+  const likeCounter = (id) => {
+    Axios({
+      method: 'PUT',
+      url: `/gallery/like/${id}`
+    }).then((res) => {
+      getImages();
+    }).catch((err) => {
       swal({
+        title: "Error!",
+        text: "Cannot update images at this time!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      });
+      console.error('PUT /gallery error', err);
+    })
+  }
+
+  const deleteImage = (id) => {
+    swal({
       title: "Are you sure?",
       text: "Once deleted, you will not be able to recover this image!",
       icon: "warning",
@@ -41,7 +59,7 @@ function App() {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        swal("Poof! Your image has been deleted!", {
+        swal("Your image has been deleted!", {
           icon: "success",
         });
         Axios({
@@ -65,15 +83,16 @@ function App() {
     });
   }
 
-    return (
-      <div className="App">
-        <Header />
-        <GalleryList 
-          galleryImages={galleryImages}
-          deleteImage={deleteImage}
-        />
-      </div>
-    );
+  return (
+    <div className="App">
+      <Header />
+      <GalleryList
+        galleryImages={galleryImages}
+        deleteImage={deleteImage}
+        likeCounter={likeCounter}
+      />
+    </div>
+  );
 }
 
 export default App;

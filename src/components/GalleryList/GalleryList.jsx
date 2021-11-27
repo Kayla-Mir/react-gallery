@@ -6,12 +6,12 @@ function GalleryList(props) {
     return (
         <div>
             <p>Gallery goes here</p>
-            {/* <GalleryItem galleryImages={galleryImages}/> */}
             {props.galleryImages.map(image => (
-                <GalleryItem 
-                    key={image.id} 
+                <GalleryItem
+                    key={image.id}
                     image={image}
-                    deleteImage={props.deleteImage}    
+                    deleteImage={props.deleteImage}
+                    likeCounter={props.likeCounter}
                 />
             ))}
         </div>
