@@ -21,4 +21,12 @@ router.get('/', (req, res) => {
     res.send(galleryItems);
 }); // END GET Route
 
+// DELETE route
+router.delete('/:id', (req, res) => {
+    const idToDelete = galleryItems.findIndex(image => image.id === Number(req.params.id));
+    console.log('idToDelete', idToDelete);
+    galleryItems.splice(idToDelete, 1);
+    res.send(200);
+});
+
 module.exports = router;
