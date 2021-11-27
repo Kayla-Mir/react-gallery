@@ -1,6 +1,8 @@
 import {useState} from 'react';
+import swal from 'sweetalert';
 
-function GalleryItem({image}) {
+function GalleryItem(props) {
+    console.log('gallery item props', props)
     const [showDescription, setShowDescription] = useState(false);
     const [likeCounter, setLikeCounter] = useState(0);
     const [deleteButton, setDeleteButton] = useState(false);
@@ -13,6 +15,25 @@ function GalleryItem({image}) {
         setLikeCounter(likeCounter + 1);
     };
 
+    // const deleteImage = () => {
+    //     swal({
+    //         title: "Are you sure?",
+    //         text: "Once deleted, you will not be able to recover this image!",
+    //         icon: "warning",
+    //         buttons: true,
+    //         dangerMode: true,
+    //       })
+    //       .then((willDelete) => {
+    //         if (willDelete) {
+    //           swal("Poof! Your image has been deleted!", {
+    //             icon: "success",
+    //           });
+    //           setDeleteButton(!deleteButton)
+    //         } else {
+    //           swal("Your image is safe!");
+    //         }
+    //       });
+    // }
 
     return (
         <>
@@ -21,13 +42,13 @@ function GalleryItem({image}) {
                 :
                 <div className="catImage">
                     {showDescription ?
-                        <p onClick={changeText} className="description">{image.description}</p> 
+                        <p onClick={changeText} className="description">{props.image.description}</p> 
                         :
-                        <img onClick={changeText} src={image.path}/>
+                        <img onClick={changeText} src={props.image.path}/>
                     }
                     <p>{likeCounter} Likes</p>
                     <button onClick={increaseLikes}>Like 💕</button>
-                    <button onClick={() => setDeleteButton(!deleteButton)}>Delete 🗑</button>
+                    <button onClick={() => props.deleteImage(props.image.id)}>Delete 🗑</button>
                 </div>
 
             }
