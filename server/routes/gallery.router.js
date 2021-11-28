@@ -6,7 +6,6 @@ const galleryItems = require('../modules/gallery.data');
 
 // PUT Route
 router.put('/like/:id', (req, res) => {
-    console.log(req.params);
     const galleryId = req.params.id;
     for (const galleryItem of galleryItems) {
         if (galleryItem.id == galleryId) {
@@ -21,14 +20,14 @@ router.get('/', (req, res) => {
     res.send(galleryItems);
 }); // END GET Route
 
-// POST route
+// POST route pushes the new image to the galleryItems array
 router.post('/', (req, res) => {
     const image = req.body;
     galleryItems.push(image);
     res.sendStatus(200);
 })
 
-// DELETE route
+// DELETE route splices based on the index, which is found with the id
 router.delete('/:id', (req, res) => {
     const idToDelete = galleryItems.findIndex(image => image.id === Number(req.params.id));
     galleryItems.splice(idToDelete, 1);
