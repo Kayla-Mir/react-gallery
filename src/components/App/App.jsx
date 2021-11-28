@@ -3,7 +3,8 @@ import './App.css';
 
 import Axios from 'axios';
 import Header from '../Header/Header.jsx';
-import GalleryList from '../GalleryList/GalleryList.jsx'
+import GalleryList from '../GalleryList/GalleryList.jsx';
+import ImageForm from '../ImageForm/ImageForm.jsx'
 import swal from 'sweetalert';
 
 
@@ -36,6 +37,25 @@ function App() {
     Axios({
       method: 'PUT',
       url: `/gallery/like/${id}`
+    }).then((res) => {
+      getImages();
+    }).catch((err) => {
+      swal({
+        title: "Error!",
+        text: "Cannot update images at this time!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      });
+      console.error('PUT /gallery error', err);
+    })
+  }
+
+  const addImage = (newImage) => {
+    Axios({
+      method: 'POST',
+      url: '/gallery',
+      data: newImage
     }).then((res) => {
       getImages();
     }).catch((err) => {
@@ -86,6 +106,7 @@ function App() {
   return (
     <div className="App">
       <Header />
+      <ImageForm addImage={addImage}/>
       <GalleryList
         galleryImages={galleryImages}
         deleteImage={deleteImage}

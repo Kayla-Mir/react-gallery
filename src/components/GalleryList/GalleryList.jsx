@@ -2,7 +2,6 @@ import './GalleryStyle.css'
 import GalleryItem from '../GalleryItem/GalleryItem.jsx'
 
 function GalleryList(props) {
-    console.log('galleryList props', props.galleryImages)
     return (
         <div>
             <p>Gallery goes here</p>

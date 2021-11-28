@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
 function GalleryItem(props) {
-    console.log('gallery item props', props)
     const [showDescription, setShowDescription] = useState(false);
     const [deleteButton, setDeleteButton] = useState(false);
 
@@ -16,9 +15,13 @@ function GalleryItem(props) {
                 :
                 <div className="catImage">
                     {showDescription ?
-                        <p onClick={changeText} className="description">{props.image.description}</p>
+                        <div onClick={changeText} className="descriptionContainer">
+                            <p className="description">{props.image.description}</p>
+                        </div>    
                         :
-                        <img onClick={changeText} src={props.image.path} />
+                        <div className="imageDiv">
+                            <img onClick={changeText} src={props.image.path} />
+                        </div>
                     }
                     <p>{props.image.likes} Likes</p>
                     <button onClick={() => props.likeCounter(props.image.id)}>Like 💕</button>
