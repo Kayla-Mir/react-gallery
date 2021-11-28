@@ -1,5 +1,18 @@
 import { useState } from 'react';
 import swal from 'sweetalert';
+import TextField from '@mui/material/TextField';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { grey } from '@mui/material/colors';
+import Button from '@mui/material/Button';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: grey[600],
+    }
+  },
+});
+
 
 function ImageForm({ addImage }) {
     const [newImagePath, setNewImagePath] = useState('');
@@ -35,22 +48,31 @@ function ImageForm({ addImage }) {
             <h3>Add a New Image!</h3>
             <form onSubmit={addNewImage}>
                 <div>
-                    <input 
-                        type="text"
-                        placeholder="URL"
+                    <TextField
+                        label="URL"
                         value={newImagePath}
                         onChange={(event) => setNewImagePath(event.target.value)}
+                        size="small"
+                        margin="normal"
                     />
-                    <input 
-                        type="text"
-                        placeholder="Description"
+                    <TextField 
+                        label="Description"
+                        multiline
+                        maxRows={4}
                         value={newImageDescription}
                         onChange={(event) => setNewImageDescription(event.target.value)}
+                        size="small"
+                        margin="normal"
                     />
                 </div>
-                <div>
-                    <button type="submit">Add Image</button>
-                </div>
+                <ThemeProvider theme={theme}>
+                    <Button 
+                        color="primary"
+                        variant="contained" 
+                        type="submit">
+                            Add Image
+                    </Button>
+                </ThemeProvider>
             </form>
             
         </div>

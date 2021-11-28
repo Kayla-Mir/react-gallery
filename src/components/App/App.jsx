@@ -25,7 +25,7 @@ function App() {
       swal({
         title: "Error!",
         text: "Cannot delete images at this time!",
-        icon: "warning",
+        icon: "error",
         buttons: true,
         dangerMode: true,
       });
@@ -43,7 +43,7 @@ function App() {
       swal({
         title: "Error!",
         text: "Cannot update images at this time!",
-        icon: "warning",
+        icon: "error",
         buttons: true,
         dangerMode: true,
       });
@@ -91,7 +91,7 @@ function App() {
           swal({
             title: "Error!",
             text: "Cannot delete images at this time!",
-            icon: "warning",
+            icon: "error",
             buttons: true,
             dangerMode: true,
           });
