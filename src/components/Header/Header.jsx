@@ -1,3 +1,4 @@
+// since we're practicing componentizing, i moved the header as well
 function Header() {
     return (
         <header className="App-header">
