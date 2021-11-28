@@ -21,9 +21,9 @@ function ImageForm({ addImage }) {
             setNewImageDescription('');
         } else {
             swal({
-                title: "Error!",
-                text: "Cannot add image at this time!",
-                icon: "warning",
+                title: "More info please!",
+                text: "Please fill in all the fields!",
+                icon: "error",
                 buttons: true,
                 dangerMode: true,
               });
