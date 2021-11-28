@@ -2,15 +2,18 @@ import { useState } from 'react';
 import swal from 'sweetalert';
 import TextField from '@mui/material/TextField';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { grey } from '@mui/material/colors';
+import { pink } from '@mui/material/colors';
 import Button from '@mui/material/Button';
 
 const theme = createTheme({
-  palette: {
-    primary: {
-      main: grey[600],
-    }
-  },
+    palette: {
+        primary: {
+            main: '#676767',
+        },
+        secondary: {
+            main: pink[200]
+        }
+    },
 });
 
 
@@ -39,7 +42,7 @@ function ImageForm({ addImage }) {
                 icon: "error",
                 buttons: true,
                 dangerMode: true,
-              });
+            });
         }
     }
 
@@ -47,34 +50,38 @@ function ImageForm({ addImage }) {
         <div>
             <h3>Add a New Image!</h3>
             <form onSubmit={addNewImage}>
-                <div>
-                    <TextField
-                        label="URL"
-                        value={newImagePath}
-                        onChange={(event) => setNewImagePath(event.target.value)}
-                        size="small"
-                        margin="normal"
-                    />
-                    <TextField 
-                        label="Description"
-                        multiline
-                        maxRows={4}
-                        value={newImageDescription}
-                        onChange={(event) => setNewImageDescription(event.target.value)}
-                        size="small"
-                        margin="normal"
-                    />
-                </div>
                 <ThemeProvider theme={theme}>
-                    <Button 
+                    <div>
+
+                        <TextField
+                            label="URL"
+                            value={newImagePath}
+                            onChange={(event) => setNewImagePath(event.target.value)}
+                            size="small"
+                            margin="normal"
+                            color="secondary"
+                        />
+                        <TextField
+                            label="Description"
+                            multiline
+                            maxRows={4}
+                            value={newImageDescription}
+                            onChange={(event) => setNewImageDescription(event.target.value)}
+                            size="small"
+                            margin="normal"
+                            color="secondary"
+                        />
+                    </div>
+
+                    <Button
                         color="primary"
-                        variant="contained" 
+                        variant="contained"
                         type="submit">
-                            Add Image
+                        Add Image
                     </Button>
                 </ThemeProvider>
             </form>
-            
+
         </div>
     )
 }

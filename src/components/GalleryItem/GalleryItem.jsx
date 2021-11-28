@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { grey } from '@mui/material/colors';
-import Button from '@mui/material/Button';
+import { grey, pink } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
@@ -11,6 +10,9 @@ const theme = createTheme({
   palette: {
     primary: {
       main: grey[600],
+    },
+    secondary: {
+        main: pink[100]
     }
   },
 });
@@ -26,29 +28,21 @@ function GalleryItem(props) {
         <div className="catImage">
             {showDescription ?
                 <div onClick={changeText} className="descriptionContainer">
-                    <p className="description">{props.image.description}</p>
+                    <p className="description"><span>{props.image.description}</span></p>
                 </div>
                 :
                 <div className="imageDiv">
                     <img onClick={changeText} src={props.image.path} />
                 </div>
             }
-            <p>{props.image.likes} Likes</p>
             <ThemeProvider theme={theme}>
-                <Button onClick={() => props.likeCounter(props.image.id)}>Like 💕</Button>
-                <Button onClick={() => props.deleteImage(props.image.id)}>Delete 🗑</Button>
-                <Stack direction="row" spacing={1}>
-                    <IconButton aria-label="delete">
+                <Stack style={{justifyContent: 'center'}} direction="row" spacing={1}>
+                    <p className="likeFont">{props.image.likes} Likes</p>
+                    <IconButton color="secondary" onClick={() => props.likeCounter(props.image.id)}>
+                        <FavoriteIcon />
+                    </IconButton>
+                    <IconButton color="primary" onClick={() => props.deleteImage(props.image.id)}>
                         <DeleteIcon />
-                    </IconButton>
-                    <IconButton aria-label="delete" disabled color="primary">
-                        <DeleteIcon />
-                    </IconButton>
-                    <IconButton color="secondary" aria-label="add an alarm">
-                        <AlarmIcon />
-                    </IconButton>
-                    <IconButton color="primary" aria-label="add to shopping cart">
-                        <AddShoppingCartIcon />
                     </IconButton>
                 </Stack>
             </ThemeProvider>
