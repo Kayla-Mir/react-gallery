@@ -1,4 +1,4 @@
-# Weekend React Gallery
+# React Gallery
 
 ## Description
 
